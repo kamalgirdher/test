@@ -7,14 +7,15 @@ Variables         config.py
 
 *** Test Cases ***
 TC1
-    FOR    ${r}    IN RANGE    ${start4}    ${stop4}
+    FOR    ${r}    IN RANGE    ${start5}    ${stop5}
         ${link}=    getExcelData    ${r}
-        Open Browser     https://www.partstree.com${link}    chrome
+        Open Browser    https://www.partstree.com${link}    chrome
         ${title}=    Run Keyword And Ignore Error    Get Text    css=.title
         ${desc}=    Run Keyword And Ignore Error    Get Text    css=.description
         ${price}=    Run Keyword And Ignore Error    Get Text    css=.price
         ${img}=    Run Keyword And Ignore Error    Get Text    css=.genuine img
-        Run Keyword If    '${title[0]}'=='PASS'    Append To File    output/output4.txt    ${title[1]}##${desc[1]}##${price[1]}##${img[1]}\n
+        Run Keyword If    '${title[0]}'=='PASS'    Append To File    output/output5.txt    ${title[1]}##${desc[1]}##${price[1]}##${img[1]}\n
+
         Close Browser
     END
 
@@ -25,4 +26,4 @@ getExcelData
     [Return]    ${rowdata}
 
 BeforeSuite
-    Open Excel Document    filename=input/4.xlsx    doc_id=inp
+    Open Excel Document    filename=input/5.xlsx    doc_id=inp

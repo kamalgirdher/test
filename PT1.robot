@@ -9,9 +9,13 @@ Variables         config.py
 TC1
     FOR    ${r}    IN RANGE    ${start1}    ${stop1}
         ${link}=    getExcelData    ${r}
-        Open Browser    ${link}    chrome
+        Open Browser    https://www.partstree.com${link}    chrome
         ${title}=    Run Keyword And Ignore Error    Get Text    css=.title
-        Run Keyword If    '${title[0]}'=='PASS'    Append To File    output1.txt    ${title[1]}\n
+        ${desc}=    Run Keyword And Ignore Error    Get Text    css=.description
+        ${price}=    Run Keyword And Ignore Error    Get Text    css=.price
+        ${img}=    Run Keyword And Ignore Error    Get Text    css=.genuine img
+        Run Keyword If    '${title[0]}'=='PASS'    Append To File    output/output1.txt    ${title[1]}##${desc[1]}##${price[1]}##${img[1]}\n
+
         Close Browser
     END
 
@@ -22,4 +26,4 @@ getExcelData
     [Return]    ${rowdata}
 
 BeforeSuite
-    Open Excel Document    filename=input.xlsx    doc_id=inp
+    Open Excel Document    filename=input/1.xlsx    doc_id=inp
